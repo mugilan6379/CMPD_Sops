@@ -1,15 +1,12 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 
 @st.cache_data
-def load_csv(csv_file):
-    df=pd.read_csv(csv_file)
+def load_data(csv):
+    df = pd.read_csv(csv)
     return df
-
-
-
-stops=load_csv('Data/Officer_Traffic_Stops.csv')
-st.dataframe(stops)
+stops = load_data('data/Officer_Traffic_Stops.csv')
 
 ## Box plot
 box = alt.Chart(stops).mark_boxplot().encode(
@@ -18,3 +15,5 @@ box = alt.Chart(stops).mark_boxplot().encode(
 ).properties(
     width = 500,
     title = 'Boxplot between Search Conducted vs Driver Age')
+
+st.altair_chart(box)
