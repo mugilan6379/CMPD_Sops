@@ -11,4 +11,9 @@ def load_csv(csv_file):
 stops=load_csv('Data/Officer_Traffic_Stops.csv')
 st.dataframe(stops)
 
-st.write('Hello world!')
+
+@st.cache_data
+def load_data(csv):
+    df = pd.read_csv(csv)
+    return df
+stops = load_data('data/Officer_Traffic_Stops.csv')
